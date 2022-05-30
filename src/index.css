@@ -1,13 +1,70 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+:root {
+  --color-bg-light: #ededed;
+  --color-bg-white: #fff;
+  --color-bg-dark: #dcdcdc;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  background: var(--color-bg-light);
+  height: 100vh;
+  padding: 100px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Tasks {
+  display: grid;
+  grid-template-rows: 1fr;
+  width: 100%;
+  height: 100%;
+  gap: 40px;
+}
+
+.Page {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-white);
+  width: 100%;
+  justify-content: space-between;
+}
+.Page .PageBanner {
+  display: flex;
+  justify-content: center;
+}
+.Page .PageHeader {
+  font-size: 1.5rem;
+  background: red;
+}
+.Page .PageFooter {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.Page .PageFooter > *:nth-child(2n) {
+  display: flex;
+  justify-content: center;
+  background: yellow;
+}
+
+.TaskList {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  height: 100%;
+  gap: 20px;
+}
+
+.Task {
+  display: flex;
+  justify-content: space-between;
+}
+
+.TaskInput {
+  width: 100%;
 }
