@@ -1,11 +1,16 @@
 import React from 'react';
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect, useCallback, useMemo} from 'react';
 import Page from './Page';
+import blankTask from './variables.js';
 
 
 const Tasks = ({amount}) => {
   const [page, setPage] = useState(0)
-  const tasksPerPage = 2
+  const tasksPerPage = amount
+
+  console.log(blankTask(2), {
+    id: 1, tasks: []
+  });
 
   const getPagesData = useCallback(() => {
     const pagesDataArray = []
@@ -13,10 +18,8 @@ const Tasks = ({amount}) => {
       const pageKey = 'page-'+i
       let pageData = localStorage.getItem(pageKey)
       if (!pageData) {
-        pageData = {
-          id: i,
-          tasks: [], // {value: str, checked: bool}
-        }
+        pageData = blankTask(i)
+
         localStorage.setItem(pageKey, JSON.stringify(pageData))
       } else {
         pageData = JSON.parse(pageData)
@@ -25,29 +28,55 @@ const Tasks = ({amount}) => {
     }
     return pagesDataArray
   }, [amount])
+
+  const updateData = useCallback((numberOfTimes) => {
+    if (numberOfTimes < 1) return
+    else if (numberOfTimes >= amount) {
+      for (let i = 0; i < amount; i++) {
+        const pageKey = 'page-'+i
+        localStorage.setItem(pageKey, JSON.stringify(blankTask(i)))
+      }
+    } else {
+      for (let i = numberOfTimes; i < amount; i++) {
+        const pageKey = 'page-'+i
+        const pageData = JSON.parse(localStorage.getItem(pageKey))
+
+        const currentId = i-numberOfTimes
+        pageData.id = currentId
+        localStorage.setItem('page-'+currentId, JSON.stringify(pageData))
+
+        if (i+numberOfTimes >= amount) localStorage.setItem(pageKey, JSON.stringify(blankTask(i)))
+      }
+    }
+    setPagesData(getPagesData())
+  }, [amount, getPagesData])
+
   const [pagesData, setPagesData] = useState(getPagesData())
+  const msInDay = useMemo(() => 24*60*60*1000, [])
 
   useEffect(() => {
     const interval = setInterval(() => {
 
-      for (let i = 0; i < amount; i++) {
-        const pageKey = 'page-'+i
-        const pageData = JSON.parse(localStorage.getItem(pageKey))
-        if (i > 0) {
-          pageData.id = i-1
-          localStorage.setItem('page-'+(i-1), JSON.stringify(pageData))
-        }
-        if (i+1 === amount) localStorage.setItem(pageKey, JSON.stringify({id: i, tasks: []}))
+      const currentTime = ~~(Date.now() / msInDay)
+      let lastTime = localStorage.getItem('lastUpdateTime')
+      if (!lastTime) {
+        lastTime = currentTime
+        localStorage.setItem('lastUpdateTime', lastTime)
       }
-      setPagesData(getPagesData())
+      const deltaDays = currentTime-lastTime
+      if (deltaDays >= 1) {
+        localStorage.setItem('lastUpdateTime', currentTime)
+        updateData(deltaDays)
+      }
 
-    }, 5000)
-
+    }, 0)
 
     return () => {
       clearInterval(interval)
     }
-  }, [amount, getPagesData])
+  }, [updateData, msInDay])
+
+
 
 
   return <div onWheel={(e) => {

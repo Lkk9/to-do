@@ -3,7 +3,7 @@ import Tasks from './components/Tasks';
 
 
 const App = () => {
-  const amount = 7
+  const amount = 5
 
 
 
