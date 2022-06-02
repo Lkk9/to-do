@@ -1,7 +1,7 @@
 import React from 'react';
 import {useEffect} from 'react';
 
-const Task = ({taskData, pageIndex, taskIndex}) => {
+const Task = ({isDisabled, taskData, pageIndex, taskIndex}) => {
   const pageKey = 'page-'+pageIndex
   const taskId = pageIndex+'-task-'+taskIndex
   const checkboxId = pageIndex+'-checkbox-'+taskIndex
@@ -9,6 +9,7 @@ const Task = ({taskData, pageIndex, taskIndex}) => {
   useEffect(() => {
     document.getElementById(taskId).value = taskData.value
     document.getElementById(checkboxId).checked = taskData.checked
+    document.getElementById(taskId).readOnly = isDisabled
   })
 
   return <div className="Task">

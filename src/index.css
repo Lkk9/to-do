@@ -43,13 +43,8 @@
   background: red;
 }
 .Page .PageFooter {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-.Page .PageFooter > *:nth-child(2n) {
   display: flex;
   justify-content: center;
-  background: yellow;
 }
 
 .TaskList {

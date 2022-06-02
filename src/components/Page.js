@@ -13,20 +13,15 @@ const Page = ({pageData, pageIndex}) => {
     <PageBanner className="PageHeader">
     {weekday}
     </PageBanner>
-    <TaskList tasksData={pageData.tasks} pageIndex={pageIndex}/>
+    <TaskList isDisabled={pageIndex === 0}  tasksData={pageData.tasks} pageIndex={pageIndex}/>
     <PageBanner className="PageFooter">
-      <div>
-        page: {pageIndex+1}
-      </div>
-      <div>
-        0 / 5
-      </div>
       <button style={{display: pageIndex === 0 ? 'none' : 'block'}} onClick={() => {
         pageData.tasks.push({
           value: '',
           checked: false
         })
         setRerender(!rerender)
+
         localStorage.setItem(pageKey, JSON.stringify(pageData))
       }}>
         add task

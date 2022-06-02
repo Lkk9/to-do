@@ -6,11 +6,7 @@ import blankTask from './variables.js';
 
 const Tasks = ({amount}) => {
   const [page, setPage] = useState(0)
-  const tasksPerPage = amount
-
-  console.log(blankTask(2), {
-    id: 1, tasks: []
-  });
+  const tasksPerPage = 2
 
   const getPagesData = useCallback(() => {
     const pagesDataArray = []
@@ -57,19 +53,19 @@ const Tasks = ({amount}) => {
   useEffect(() => {
     const interval = setInterval(() => {
 
-      const currentTime = ~~(Date.now() / msInDay)
+      const currentTime = Date.now()//~~(Date.now() / msInDay)
       let lastTime = localStorage.getItem('lastUpdateTime')
       if (!lastTime) {
         lastTime = currentTime
         localStorage.setItem('lastUpdateTime', lastTime)
       }
       const deltaDays = currentTime-lastTime
-      if (deltaDays >= 1) {
+      if (deltaDays >= 3000) {
         localStorage.setItem('lastUpdateTime', currentTime)
-        updateData(deltaDays)
+        updateData(1)
       }
 
-    }, 0)
+    })
 
     return () => {
       clearInterval(interval)
