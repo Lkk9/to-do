@@ -1,30 +1,26 @@
 import React from 'react';
-import {useEffect} from 'react';
+import {useEffect, useCallback, useId} from 'react';
 
-const Task = ({isDisabled, taskData, pageIndex, taskIndex}) => {
-  const pageKey = 'page-'+pageIndex
-  const taskId = pageIndex+'-task-'+taskIndex
-  const checkboxId = pageIndex+'-checkbox-'+taskIndex
+const Task = ({isMain, taskData, rewriteTask, removeTask, completeTask, taskIndex, pageKey}) => {
+  const taskId = useId()
+  const checkboxId = useId()
 
   useEffect(() => {
     document.getElementById(taskId).value = taskData.value
     document.getElementById(checkboxId).checked = taskData.checked
-    document.getElementById(taskId).readOnly = isDisabled
+    document.getElementById(taskId).readOnly = isMain
   })
 
   return <div className="Task">
-    <input type="checkbox" id={checkboxId} style={{display: pageIndex === 0 ? 'inline' : 'none'}} onChange={(e) => {
-      const pageData = JSON.parse(localStorage.getItem(pageKey))
-      pageData.tasks[taskIndex].checked = e.target.checked
-
-      localStorage.setItem(pageKey, JSON.stringify(pageData))
+    <input type="checkbox" id={checkboxId} style={{display: isMain ? 'inline' : 'none'}} onChange={(e) => {
+      completeTask(taskIndex, e.target.checked)
     }}/>
     <input type="text" id={taskId} className="TaskInput" onChange={(e) => {
-      const pageData = JSON.parse(localStorage.getItem(pageKey))
-      pageData.tasks[taskIndex].value = e.target.value
-
-      localStorage.setItem(pageKey, JSON.stringify(pageData))
+      rewriteTask(taskIndex, e.target.value)
     }}/>
+    <button style={{display: isMain ? 'none' : 'block'}} onClick={() => {
+      removeTask(taskIndex)
+    }}>delete</button>
   </div>
 }
 

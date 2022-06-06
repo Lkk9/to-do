@@ -1,55 +1,34 @@
 import React from 'react';
 import {useState, useEffect, useCallback, useMemo} from 'react';
 import Page from './Page';
-import blankTask from './variables.js';
-
+import {tools} from '../tools.js';
 
 const Tasks = ({amount}) => {
-  const [page, setPage] = useState(0)
-  const tasksPerPage = 2
-
-  const getPagesData = useCallback(() => {
-    const pagesDataArray = []
-    for (let i = 0; i < amount; i++) {
-      const pageKey = 'page-'+i
-      let pageData = localStorage.getItem(pageKey)
-      if (!pageData) {
-        pageData = blankTask(i)
-
-        localStorage.setItem(pageKey, JSON.stringify(pageData))
-      } else {
-        pageData = JSON.parse(pageData)
-      }
-      pagesDataArray.push(pageData)
-    }
-    return pagesDataArray
-  }, [amount])
+  const [rerender, setRerender] = useState(false)
 
   const updateData = useCallback((numberOfTimes) => {
     if (numberOfTimes < 1) return
     else if (numberOfTimes >= amount) {
       for (let i = 0; i < amount; i++) {
-        const pageKey = 'page-'+i
-        localStorage.setItem(pageKey, JSON.stringify(blankTask(i)))
+        const pageKey = tools.getPageKey(i)
+        localStorage.setItem(pageKey, JSON.stringify(tools.getBlankTask(i)))
       }
     } else {
       for (let i = numberOfTimes; i < amount; i++) {
-        const pageKey = 'page-'+i
+        const pageKey = tools.getPageKey(i)
         const pageData = JSON.parse(localStorage.getItem(pageKey))
 
         const currentId = i-numberOfTimes
         pageData.id = currentId
-        localStorage.setItem('page-'+currentId, JSON.stringify(pageData))
+        localStorage.setItem(tools.getPageKey(currentId), JSON.stringify(pageData))
 
-        if (i+numberOfTimes >= amount) localStorage.setItem(pageKey, JSON.stringify(blankTask(i)))
+        if (i+numberOfTimes >= amount) localStorage.setItem(pageKey, JSON.stringify(tools.getBlankTask(i)))
       }
     }
-    setPagesData(getPagesData())
-  }, [amount, getPagesData])
+    setRerender(!rerender)
+  }, [amount, rerender])
 
-  const [pagesData, setPagesData] = useState(getPagesData())
   const msInDay = useMemo(() => 24*60*60*1000, [])
-
   useEffect(() => {
     const interval = setInterval(() => {
 
@@ -70,18 +49,11 @@ const Tasks = ({amount}) => {
     return () => {
       clearInterval(interval)
     }
-  }, [updateData, msInDay])
+  }, [msInDay, updateData])
 
 
-
-
-  return <div onWheel={(e) => {
-    let nextPage = page + Math.sign(e.deltaY)
-    nextPage = nextPage < 0 ? 0 : nextPage > Math.ceil(amount/tasksPerPage)-1 ? Math.ceil(amount/tasksPerPage)-1 : nextPage
-    setPage(nextPage)
-    setPagesData(getPagesData())
-  }} className="Tasks" style={{gridTemplateColumns: `repeat(${tasksPerPage}, 1fr)`}}>
-    {[...pagesData.splice(tasksPerPage*page, tasksPerPage).map(pageData => <Page pageData={pageData} pageIndex={pageData.id} key={'page-'+pageData.id} />)]}
+  return <div className="Tasks">
+    {[...Array(amount).fill(null).map((x, i) => <Page pageKey={tools.getPageKey(i)} pageIndex={i} key={'pageN-'+i} />)]}
   </div>
 }
 
