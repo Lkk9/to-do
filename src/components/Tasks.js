@@ -6,6 +6,13 @@ import {tools} from '../tools.js';
 const Tasks = ({amount}) => {
   const [rerender, setRerender] = useState(false)
 
+  for (let i = 0; i < amount; i++) {
+    const pageKey = tools.getPageKey(i)
+    if (!localStorage.getItem(pageKey)) {
+      localStorage.setItem(pageKey, JSON.stringify(tools.getBlankTask(i)))
+    }
+  }
+
   const updateData = useCallback((numberOfTimes) => {
     if (numberOfTimes < 1) return
     else if (numberOfTimes >= amount) {
@@ -16,13 +23,16 @@ const Tasks = ({amount}) => {
     } else {
       for (let i = numberOfTimes; i < amount; i++) {
         const pageKey = tools.getPageKey(i)
-        const pageData = JSON.parse(localStorage.getItem(pageKey))
 
-        const currentId = i-numberOfTimes
-        pageData.id = currentId
-        localStorage.setItem(tools.getPageKey(currentId), JSON.stringify(pageData))
+        if (i+numberOfTimes >= amount)
+          localStorage.setItem(pageKey, JSON.stringify(tools.getBlankTask(i)))
+        else {
+          const pageData = JSON.parse(localStorage.getItem(pageKey))
+          const currentId = i-numberOfTimes
+          pageData.id = currentId
+          localStorage.setItem(tools.getPageKey(currentId), JSON.stringify(pageData))
+        }
 
-        if (i+numberOfTimes >= amount) localStorage.setItem(pageKey, JSON.stringify(tools.getBlankTask(i)))
       }
     }
     setRerender(!rerender)
@@ -32,16 +42,16 @@ const Tasks = ({amount}) => {
   useEffect(() => {
     const interval = setInterval(() => {
 
-      const currentTime = Date.now()//~~(Date.now() / msInDay)
+      const currentTime = ~~(Date.now() / msInDay)
       let lastTime = localStorage.getItem('lastUpdateTime')
       if (!lastTime) {
         lastTime = currentTime
         localStorage.setItem('lastUpdateTime', lastTime)
       }
       const deltaDays = currentTime-lastTime
-      if (deltaDays >= 3000) {
+      if (deltaDays >= 1) {
         localStorage.setItem('lastUpdateTime', currentTime)
-        updateData(1)
+        updateData(deltaDays)
       }
 
     })
