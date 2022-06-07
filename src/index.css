@@ -1,19 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  color: var(--color-black);
 }
 :root {
-  --color-bg-light: #ededed;
-  --color-bg-white: #fff;
-  --color-bg-dark: #dcdcdc;
+  --color-light: #ddd;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-dark: #bbb;
 }
 
 .App {
-  background: var(--color-bg-light);
+  background: var(--color-dark);
   height: 100vh;
-  padding: 100px 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,29 +30,32 @@
   width: 100%;
 
   gap: 40px;
-  padding: 40px 0;
+  padding: 40px 20px;
 
   flex-wrap: wrap;
-  overflow-x: scroll;
   flex-direction: column;
-
+  overflow-x: scroll;
+  scroll-behavior: smooth;
 }
 
 .Page {
   display: flex;
   flex-direction: column;
-  background: var(--color-bg-white);
-  width: 500px;
+  background: var(--color-white);
+  /* aspect-ratio: 2/1; */
+  width: min(500px, 100%);
   height: 100%;
+  /* overflow-y: scroll; */
   justify-content: space-between;
 }
 .Page .PageBanner {
   display: flex;
+  background: var(--color-light);
   justify-content: center;
 }
 .Page .PageHeader {
   font-size: 1.5rem;
-  background: red;
+  font-family: 'Overpass', sans-serif;
 }
 .Page .PageFooter {
   display: flex;
@@ -67,8 +74,45 @@
 .Task {
   display: flex;
   justify-content: space-between;
+  background: var(--color-light);
 }
 
-.TaskInput {
+.Task .Task-label {
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Task .Task-label .Task-checkbox {
+  background: url('./img/check-mark.svg') no-repeat;
+  opacity: .1;
   width: 100%;
+  height: 100%;
+  transform: scale(60%);
+}
+.Task .Task-label input[type="checkbox"]:checked ~ .Task-checkbox {
+  opacity: 1;
+}
+.Task .Task-label input[type="checkbox"] {display: none;}
+
+.Task-input {
+  resize: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  word-wrap: normal;
+  border: none;
+  padding: 12px 0;
+  margin: 0 10px;
+  height: auto;
+  width: 100%;
+  background: transparent;
+}
+.Task-input:focus {
+  outline: none;
+}
+.Task-input:read-only {
+  user-select: none;
+  cursor: default;
 }

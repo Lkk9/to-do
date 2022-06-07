@@ -1,7 +1,7 @@
 import React from 'react';
-import {useEffect, useCallback, useId} from 'react';
+import {useEffect, useId} from 'react';
 
-const Task = ({isMain, taskData, rewriteTask, removeTask, completeTask, taskIndex, pageKey}) => {
+const Task = ({isMain, taskData, rewriteTask, removeTask, completeTask, taskIndex}) => {
   const taskId = useId()
   const checkboxId = useId()
 
@@ -12,12 +12,15 @@ const Task = ({isMain, taskData, rewriteTask, removeTask, completeTask, taskInde
   })
 
   return <div className="Task">
-    <input type="checkbox" id={checkboxId} style={{display: isMain ? 'inline' : 'none'}} onChange={(e) => {
-      completeTask(taskIndex, e.target.checked)
-    }}/>
-    <input type="text" id={taskId} className="TaskInput" onChange={(e) => {
-      rewriteTask(taskIndex, e.target.value)
-    }}/>
+    <label className="Task-label" style={{display: !isMain ? 'none' : 'block'}}>
+      <input type="checkbox" id={checkboxId} onChange={(e) => {
+        completeTask(taskIndex, e.target.checked)
+      }}/>
+      <div className="Task-checkbox"></div>
+    </label>
+      <textarea wrap="off" rows="1" id={taskId} className="Task-input" onChange={(e) => {
+        rewriteTask(taskIndex, e.target.value)
+      }}></textarea>
     <button style={{display: isMain ? 'none' : 'block'}} onClick={() => {
       removeTask(taskIndex)
     }}>delete</button>

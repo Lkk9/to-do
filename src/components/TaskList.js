@@ -5,6 +5,7 @@ import {tools} from '../tools.js';
 
 const TaskList = ({isMain, pageKey}) => {
   const [rerender, setRerender] = useState(false)
+
   const rewriteTask = (index, text) => {
     tools.rewriteData(pageKey, (data) => {
       data.tasks[index].value = text
@@ -34,10 +35,8 @@ const TaskList = ({isMain, pageKey}) => {
       removeTask={removeTask}
       completeTask={completeTask}
       taskIndex={i}
-      pageKey={pageKey}
       taskData={taskData}
       key={'-task-'+i}/>)]}
-
   </div>
 }
 
