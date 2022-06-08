@@ -9,6 +9,12 @@ export const tools = {
   getData: (key) => JSON.parse(localStorage.getItem(key)),
   getPageKey: (index) => 'page-'+index,
   getScore: () => {
-    
-  }
+    let score = localStorage.getItem('score')
+    if (!score || score < 0) {
+      score = 0
+      localStorage.setItem('score', ''+score)
+    }
+    return +score
+  },
+  setScore: (number) => localStorage.setItem('score', ''+(number < 0 ? 0 : number))
 }

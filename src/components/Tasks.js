@@ -51,6 +51,14 @@ const Tasks = ({amount}) => {
       const deltaDays = currentTime-lastTime
       if (deltaDays >= 1) {
         localStorage.setItem('lastUpdateTime', currentTime)
+        tools.setScore(
+          tools.getScore()
+          +
+          tools.getData(tools.getPageKey(0))
+          .tasks
+          .map(t => t.checked ? 1 : -1)
+          .reduce((a, b) => a + b, 0)
+        )
         updateData(deltaDays)
       }
 

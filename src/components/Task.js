@@ -12,7 +12,7 @@ const Task = ({isMain, taskData, rewriteTask, removeTask, completeTask, taskInde
   })
 
   return <div className="Task">
-    <label className="Task-icon" style={{display: !isMain ? 'none' : 'inline'}}>
+    <label className="Task-icon" style={{display: !isMain ? 'none' : 'flex'}}>
       <input style={{display: 'none'}} type="checkbox" id={checkboxId} onChange={(e) => {
         completeTask(taskIndex, e.target.checked)
       }}/>
@@ -23,7 +23,7 @@ const Task = ({isMain, taskData, rewriteTask, removeTask, completeTask, taskInde
       x="0px"
       y="0px"
       viewBox="0 0 17.837 17.837"
-      style={{enableBackground: 'new 0 0 17.837 17.837'}}>
+      style={{enableBackground: "new 0 0 17.837 17.837"}}>
         <g>
         	<path d="M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27
             c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0
@@ -32,18 +32,18 @@ const Task = ({isMain, taskData, rewriteTask, removeTask, completeTask, taskInde
       </svg>
     </label>
 
-    <textarea
+    <input
     placeholder="new task"
     wrap="off"
-    rows="1"
+    row="6"
     id={taskId}
     className="Task-input"
     onChange={(e) => {
         rewriteTask(taskIndex, e.target.value)
     }}
-    ></textarea>
+    />
 
-    <label className="Task-icon" style={{display: isMain ? 'none' : 'inline'}}>
+    <label className="Task-icon" style={{display: isMain ? 'none' : 'flex'}}>
       <button style={{display: 'none'}} onClick={() => {
         removeTask(taskIndex)
       }}>

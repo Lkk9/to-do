@@ -48,23 +48,24 @@
 }
 
 .Page {
-  display: flex;
-  flex-direction: column;
   background: var(--color-light);
   overflow: hidden;
   width: max(min(100%, 500px), 50%);
   height: 100%;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 50px 1fr 50px;
 }
 .PageBanner {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: min(100%, 50px);
+  height: 50px;
   font-family: 'KatahdinRound', sans-serif;
+  user-select: none;
 }
 .PageHeader {
   font-size: 1.5rem;
+  height: 50px;
   color: var(--color-blue);
   background: var(--color-red);
 }
@@ -78,30 +79,27 @@
   justify-content: center;
   align-items: center;
   background: var(--color-white);
+  color: var(--color-dark);
 }
 
 .TaskList {
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
   padding: 40px;
   height: 100%;
   gap: 20px;
   overflow-y: scroll;
-  /* --shadow-size: 20px;
-  box-shadow: inset 0px calc(0px - var(--shadow-size)) var(--shadow-size)  var(--shadow-size)  var(--color-dark); */
 }
 
-.add-task-btn {
-  border: none;
-  background: url('./img/remove-icon.svg') no-repeat center;
-  background-size: var(--size-mark);
+.add-icon {
   transform: rotate(45deg);
-  height: calc(var(--size-mark) * 1.5);
-  border-radius: 50%;
-  aspect-ratio: 1/1;
 }
-.add-task-btn:hover {
-  background-color: var(--color-light);
+.add-icon path {
+  fill: var(--color-dark);
+}
+.add-icon:hover {
+  transform: rotateZ(225deg);
 }
 
 .score-info {
@@ -110,18 +108,17 @@
 
 .Task {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   /* border: var(--border); */
   border-radius: 5px;
   background: var(--color-white);
   height: 50px;
+  width: 100%;
 }
 
 .checkbox-icon {
   /* background: url('./img/check-mark.svg') no-repeat center; */
   opacity: .1;
-  width: 100%;
-  height: 100%;
 }
 .checkbox-icon path {
   fill: var(--color-blue);
@@ -138,12 +135,13 @@
   font-size: 1rem;
   word-wrap: normal;
   border: none;
-  padding: 12px 0;
   vertical-align: middle;
   margin: 0 10px;
+  padding: 12px 0;
   height: 100%;
   width: 100%;
   background: transparent;
+  color: var(--color-blue);
 }
 .Task-input:focus {
   outline: none;
@@ -163,13 +161,15 @@
 }
 
 .Task-icon {
-  height: 100%;
+  height: 50px;
   aspect-ratio: 1/1;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .icon {
-  transition: 100ms;
-  width: 100%;
-  height: 100%;
-  transform: scale(var(--size-mark));
+  transition: 300ms;
+  width: var(--size-mark);
+  height: var(--size-mark);
 }
