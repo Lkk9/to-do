@@ -7,5 +7,8 @@ export const tools = {
   },
   rewriteData: (key, f) => localStorage.setItem(key, JSON.stringify(f(JSON.parse(localStorage.getItem(key))))),
   getData: (key) => JSON.parse(localStorage.getItem(key)),
-  getPageKey: (index) => 'page-'+index
+  getPageKey: (index) => 'page-'+index,
+  getScore: () => {
+    
+  }
 }

@@ -16,7 +16,10 @@ const Page = ({pageKey, pageIndex}) => {
     </PageBanner>
     <TaskList isMain={isMain} pageKey={pageKey}/>
     <PageBanner className="PageFooter">
-      <button style={{display: isMain ? 'none' : 'block'}} onClick={() => {
+      <div className="score-info" style={{display: !isMain ? 'none' : 'block'}}>
+        Score: {tools.getScore()}
+      </div>
+      <button className=" add-task-btn" style={{display: isMain ? 'none' : 'block'}} onClick={() => {
 
         tools.rewriteData(pageKey, (data) => {
           data.tasks.push({
@@ -27,9 +30,7 @@ const Page = ({pageKey, pageIndex}) => {
         })
         setRerender(!rerender)
 
-      }}>
-        add task
-      </button>
+      }}></button>
     </PageBanner>
   </div>
 }

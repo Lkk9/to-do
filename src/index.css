@@ -1,36 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
 
+@font-face {
+    font-family: KatahdinRound;
+    src: url("./fonts/KatahdinRound.otf") format("opentype");
+}
+
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  color: var(--color-black);
+  font-family: 'Roboto', sans-serif;
 }
 :root {
-  --color-light: #ddd;
+  --color-light: #DDDDDD;
+  --color-dark: #222831;
+  --color-red: #F05454;
+  --color-blue: #30475E;
   --color-white: #fff;
   --color-black: #000;
-  --color-dark: #bbb;
+
+  --size-mark: 60%;
+
+  --border: 2px solid var(--color-dark);
 }
 
 .App {
-  background: var(--color-dark);
+  background: var(--color-light);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
 .Tasks {
   display: flex;
   height: 100%;
   width: 100%;
-
-  gap: 40px;
-  padding: 40px 20px;
+  background: var(--color-white);
+  padding-bottom: 12px;
 
   flex-wrap: wrap;
   flex-direction: column;
@@ -41,25 +50,34 @@
 .Page {
   display: flex;
   flex-direction: column;
-  background: var(--color-white);
-  /* aspect-ratio: 2/1; */
-  width: min(500px, 100%);
+  background: var(--color-light);
+  overflow: hidden;
+  width: max(min(100%, 500px), 50%);
   height: 100%;
-  /* overflow-y: scroll; */
   justify-content: space-between;
 }
-.Page .PageBanner {
+.PageBanner {
   display: flex;
-  background: var(--color-light);
   justify-content: center;
+  align-items: center;
+  height: min(100%, 50px);
+  font-family: 'KatahdinRound', sans-serif;
 }
-.Page .PageHeader {
+.PageHeader {
   font-size: 1.5rem;
-  font-family: 'Overpass', sans-serif;
+  color: var(--color-blue);
+  background: var(--color-red);
 }
-.Page .PageFooter {
+.Page:first-child .PageHeader {
+  color: var(--color-red);
+  background: var(--color-blue);
+}
+
+.PageFooter {
   display: flex;
   justify-content: center;
+  align-items: center;
+  background: var(--color-white);
 }
 
 .TaskList {
@@ -69,43 +87,61 @@
   height: 100%;
   gap: 20px;
   overflow-y: scroll;
+  /* --shadow-size: 20px;
+  box-shadow: inset 0px calc(0px - var(--shadow-size)) var(--shadow-size)  var(--shadow-size)  var(--color-dark); */
+}
+
+.add-task-btn {
+  border: none;
+  background: url('./img/remove-icon.svg') no-repeat center;
+  background-size: var(--size-mark);
+  transform: rotate(45deg);
+  height: calc(var(--size-mark) * 1.5);
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+}
+.add-task-btn:hover {
+  background-color: var(--color-light);
+}
+
+.score-info {
+  font-weight: bold;
 }
 
 .Task {
   display: flex;
   justify-content: space-between;
-  background: var(--color-light);
+  /* border: var(--border); */
+  border-radius: 5px;
+  background: var(--color-white);
+  height: 50px;
 }
 
-.Task .Task-label {
-  height: 100%;
-  aspect-ratio: 1/1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.Task .Task-label .Task-checkbox {
-  background: url('./img/check-mark.svg') no-repeat;
+.checkbox-icon {
+  /* background: url('./img/check-mark.svg') no-repeat center; */
   opacity: .1;
   width: 100%;
   height: 100%;
-  transform: scale(60%);
 }
-.Task .Task-label input[type="checkbox"]:checked ~ .Task-checkbox {
+.checkbox-icon path {
+  fill: var(--color-blue);
+}
+.Task input[type="checkbox"]:checked ~ .checkbox-icon {
   opacity: 1;
 }
-.Task .Task-label input[type="checkbox"] {display: none;}
+.Task input[type="checkbox"] {display: none;}
 
 .Task-input {
   resize: none;
-  font-family: 'Roboto', sans-serif;
+  overflow-y: hidden;
   font-weight: 400;
   font-size: 1rem;
   word-wrap: normal;
   border: none;
   padding: 12px 0;
+  vertical-align: middle;
   margin: 0 10px;
-  height: auto;
+  height: 100%;
   width: 100%;
   background: transparent;
 }
@@ -113,6 +149,27 @@
   outline: none;
 }
 .Task-input:read-only {
-  user-select: none;
   cursor: default;
+}
+
+.remove-icon {
+  opacity: .1
+}
+.remove-icon path {
+  fill: var(--color-red);
+}
+.remove-icon:hover {
+  opacity: 1;
+}
+
+.Task-icon {
+  height: 100%;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+}
+.icon {
+  transition: 100ms;
+  width: 100%;
+  height: 100%;
+  transform: scale(var(--size-mark));
 }
