@@ -150,7 +150,7 @@
 }
 
 .remove-icon {
-  opacity: .1
+  opacity: .1;
 }
 .remove-icon path {
   fill: var(--color-red);
