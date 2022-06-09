@@ -10,6 +10,11 @@ const Tasks = ({amount}) => {
     const pageKey = tools.getPageKey(i)
     if (!localStorage.getItem(pageKey)) {
       localStorage.setItem(pageKey, JSON.stringify(tools.getBlankTask(i)))
+    } else if (i === 0) {
+      tools.rewriteData(tools.getPageKey(0), (data) => {
+        data.tasks = data.tasks.filter(t => t.value)
+        return data
+      })
     }
   }
 
@@ -51,6 +56,7 @@ const Tasks = ({amount}) => {
       const deltaDays = currentTime-lastTime
       if (deltaDays >= 1) {
         localStorage.setItem('lastUpdateTime', currentTime)
+
         tools.setScore(
           tools.getScore()
           +
@@ -59,6 +65,7 @@ const Tasks = ({amount}) => {
           .map(t => t.checked ? 1 : -1)
           .reduce((a, b) => a + b, 0)
         )
+
         updateData(deltaDays)
       }
 

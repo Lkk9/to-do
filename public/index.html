@@ -2,8 +2,12 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title></title>
+    <link rel="icon" href="task-list-black.png" type="image/png">
+    <title>Todo</title>
+    <script type="text/javascript">
+      const link = document.querySelector("link[rel~='icon']")
+      link.href = `task-list-${(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)?'white':'black'}.png`
+    </script>
   </head>
   <body>
     <div id="root"></div>

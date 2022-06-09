@@ -93,17 +93,16 @@
 }
 
 .add-icon {
+  border-radius: 50%;
   transform: rotate(45deg);
 }
 .add-icon path {
   fill: var(--color-dark);
 }
-.add-icon:hover {
-  transform: rotateZ(225deg);
-}
 
 .score-info {
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
 .Task {
