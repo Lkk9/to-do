@@ -22,6 +22,8 @@
   --color-black: #000;
 
   --size-mark: 60%;
+  --size-onePage: 500px;
+  --size-banner: 50px;
 
   --border: 2px solid var(--color-dark);
 }
@@ -50,22 +52,20 @@
 .Page {
   background: var(--color-light);
   overflow: hidden;
-  width: max(min(100%, 500px), 50%);
+  width: max(min(100%, var(--size-onePage)), 50%);
   height: 100%;
   display: grid;
-  grid-template-rows: 50px 1fr 50px;
+  grid-template-rows: var(--size-banner) 1fr var(--size-banner);
 }
 .PageBanner {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
   font-family: 'KatahdinRound', sans-serif;
   user-select: none;
 }
 .PageHeader {
   font-size: 1.5rem;
-  height: 50px;
   color: var(--color-blue);
   background: var(--color-red);
 }
@@ -172,3 +172,21 @@
   width: var(--size-mark);
   height: var(--size-mark);
 }
+
+.expand-button {
+  width: var(--size-banner);
+  height: calc(100% - var(--size-banner));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  background: var(--color-red);
+}
+.expand-arrow {
+   width: 100%;
+ }
+ .expand-arrow path {
+   fill: var(--color-black);
+   opacity: .33
+ }

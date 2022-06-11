@@ -4,13 +4,13 @@ import PageBanner from './PageBanner';
 import TaskList from './TaskList';
 import {tools} from '../tools.js';
 
-const Page = ({pageKey, pageIndex}) => {
+const Page = ({pageKey, pageIndex, children}) => {
 
   const isMain = pageIndex === 0
   const [rerender, setRerender] = useState(false)
   const weekday = new Date(new Date().setDate(new Date().getDate() + pageIndex)).toLocaleDateString('en-US', {weekday: 'long'})
 
-  return <div className="Page">
+  return <><div className="Page">
     <PageBanner className="PageHeader">
     {weekday}
     </PageBanner>
@@ -54,6 +54,8 @@ const Page = ({pageKey, pageIndex}) => {
       </label>
     </PageBanner>
   </div>
+  {children}
+  </>
 }
 
 export default Page;

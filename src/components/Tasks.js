@@ -2,8 +2,10 @@ import React from 'react';
 import {useState, useEffect, useCallback, useMemo} from 'react';
 import Page from './Page';
 import {tools} from '../tools.js';
+import SwitchButton from './SwitchButton';
 
 const Tasks = ({amount}) => {
+  const [displayedPages, setDisplayedPages] = useState(2)
   const [rerender, setRerender] = useState(false)
 
   for (let i = 0; i < amount; i++) {
@@ -47,7 +49,7 @@ const Tasks = ({amount}) => {
   useEffect(() => {
     const interval = setInterval(() => {
 
-      const currentTime = ~~(Date.now() / msInDay)
+      const currentTime = ~~((Date.now() + new Date().getTimezoneOffset()*60*1000) / msInDay)
       let lastTime = localStorage.getItem('lastUpdateTime')
       if (!lastTime) {
         lastTime = currentTime
@@ -76,9 +78,17 @@ const Tasks = ({amount}) => {
     }
   }, [msInDay, updateData])
 
-
+  function yellPage(i, yellChildren=()=><></>) {
+    return <Page pageKey={tools.getPageKey(i)} pageIndex={i} key={'pageN-'+i}>{yellChildren()}</Page>
+  }
   return <div className="Tasks">
-    {[...Array(amount).fill(null).map((x, i) => <Page pageKey={tools.getPageKey(i)} pageIndex={i} key={'pageN-'+i} />)]}
+    {[...Array(displayedPages).fill(null).map((x, i) => {
+      if (i === 1) {
+        return yellPage(i, () => <SwitchButton switchIcon={displayedPages === amount} switchFunction={() => setDisplayedPages(displayedPages === amount ? 2 : amount)}/>)
+      }
+      return yellPage(i)
+      //{if (i === 1) <SwitchButton switchIcon={displayedPages === amount} switchFunction={() => setDisplayedPages(displayedPages === amount ? 2 : amount)}/>}
+    })]}
   </div>
 }
 
