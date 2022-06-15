@@ -3,6 +3,7 @@ import {useState} from 'react';
 import PageBanner from './PageBanner';
 import TaskList from './TaskList';
 import {tools} from '../tools.js';
+import DaysStatusIndicator from './DaysStatusIndicator';
 
 const Page = ({pageKey, pageIndex, children}) => {
 
@@ -16,9 +17,8 @@ const Page = ({pageKey, pageIndex, children}) => {
     </PageBanner>
     <TaskList isMain={isMain} pageKey={pageKey}/>
     <PageBanner className="PageFooter">
-      <div className="score-info" style={{display: !isMain ? 'none' : 'block'}}>
-        Score: {tools.getScore()}
-      </div>
+      <DaysStatusIndicator style={{display: !isMain ? 'none' : 'flex'}} />
+
       <label className="Task-icon" style={{display: isMain ? 'none' : 'flex'}}>
         <button style={{display: 'none'}} onClick={() => {
 

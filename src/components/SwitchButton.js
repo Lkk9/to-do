@@ -1,6 +1,8 @@
 import React from 'react';
 
 const SwitchButton = ({switchFunction, switchIcon}) => (
+  <>
+  <div className="expand-button-head"></div>
   <label className="expand-button">
     <button style={{display: 'none'}} onClick={() => {
       switchFunction()
@@ -14,6 +16,7 @@ const SwitchButton = ({switchFunction, switchIcon}) => (
     </g>
     </svg>
   </label>
+  </>
 );
 
 export default SwitchButton;

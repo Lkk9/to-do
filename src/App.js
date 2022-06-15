@@ -1,12 +1,9 @@
 import React from 'react';
-import Tasks from './components/Tasks';
-
+import Scene from './components/Scene';
 
 const App = () => {
-  const amount = 7
-
   return <div className="App">
-    <Tasks amount={amount}/>
+    <Scene />
   </div>
 }
 

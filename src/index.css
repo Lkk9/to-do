@@ -29,12 +29,40 @@
 }
 
 .App {
-  background: var(--color-light);
   height: 100vh;
+  width: 100%;
+}
+.Scene {
+  background: var(--color-light);
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.switch-scene {
+  user-select: none;
+  width: calc(36px + var(--size-banner));
+  height: var(--size-banner);
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  padding: 0 24px 0 12px;
+  background: linear-gradient(90deg, var(--color-white) 0% 75%, transparent 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.switch-scene svg {
+  transform: scale(60%);
+}
+.switch-scene path {
+  opacity: .5;
+}
+
+/* Tasks */
 
 .Tasks {
   display: flex;
@@ -100,15 +128,24 @@
   fill: var(--color-dark);
 }
 
-.score-info {
-  font-weight: bold;
-  font-size: 1.1rem;
+.info-days {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  --gap: calc(var(--size-banner)/4);
+  padding: var(--gap);
+  gap: var(--gap);
+}
+.info-days .info-day {
+  height: 100%;
+  aspect-ratio: 1/1;
 }
 
 .Task {
   display: flex;
   justify-content: flex-start;
-  /* border: var(--border); */
   border-radius: 5px;
   background: var(--color-white);
   height: 50px;
@@ -116,7 +153,6 @@
 }
 
 .checkbox-icon {
-  /* background: url('./img/check-mark.svg') no-repeat center; */
   opacity: .1;
 }
 .checkbox-icon path {
@@ -173,15 +209,20 @@
   height: var(--size-mark);
 }
 
+.expand-button-head {
+  background: var(--color-red);
+  width: var(--size-banner);
+  height: var(--size-banner);
+}
 .expand-button {
   width: var(--size-banner);
-  height: calc(100% - var(--size-banner));
+  height: calc(100% - 2 * var(--size-banner));
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 
-  background: var(--color-red);
+  background: var(--color-light);
 }
 .expand-arrow {
    width: 100%;
@@ -190,3 +231,47 @@
    fill: var(--color-black);
    opacity: .33
  }
+
+/* Graph */
+
+.Graph-container {
+  width: 100%;
+  height: 100%;
+  background: var(--color-white);
+  padding-bottom: calc(12px + var(--size-banner));
+}
+
+.Graph {
+  width: 100%;
+  height: 100%;
+  background: var(--color-white);
+  /* display: grid;
+  grid-template-columns: var(--size-banner) 1fr var(--size-banner);
+  grid-template-rows: var(--size-banner) 1fr var(--size-banner); */
+}
+/*
+.Graph:before {
+  content: 'Score';
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  grid-column: 1/2;
+  grid-row: 2/3;
+
+  position: relative;
+}
+.Graph:after {
+  content: 'day';
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  grid-column: 2/3;
+  grid-row: 3/4;
+
+  position: relative;
+} */
+
+#graph {
+  width: 100%;
+  height: 100%;
+}

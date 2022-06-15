@@ -22,7 +22,19 @@ const Tasks = ({amount}) => {
 
   const updateData = useCallback((numberOfTimes) => {
     if (numberOfTimes < 1) return
-    else if (numberOfTimes >= amount) {
+
+    for (let i = 0; i < numberOfTimes; i++) {
+      if (i >= amount) {
+        tools.writeScore(null)
+      } else {
+        const pageKey = tools.getPageKey(i)
+        const tasks = tools.getData(pageKey).tasks.filter(t => t.value !== '')
+        const score = tasks.length === 0 ? null : tasks.map(t => 2*(+t.checked)-1).reduce((a, b) => a+b, 0)
+        tools.writeScore(score)
+      }
+    }
+
+    if (numberOfTimes >= amount) {
       for (let i = 0; i < amount; i++) {
         const pageKey = tools.getPageKey(i)
         localStorage.setItem(pageKey, JSON.stringify(tools.getBlankTask(i)))
@@ -49,8 +61,8 @@ const Tasks = ({amount}) => {
   useEffect(() => {
     const interval = setInterval(() => {
 
-      const currentTime = ~~((Date.now() + new Date().getTimezoneOffset()*60*1000) / msInDay)
-      let lastTime = localStorage.getItem('lastUpdateTime')
+      const currentTime = ~~((Date.now() - new Date().getTimezoneOffset()*60*1000) / msInDay)
+      let lastTime = +localStorage.getItem('lastUpdateTime')
       if (!lastTime) {
         lastTime = currentTime
         localStorage.setItem('lastUpdateTime', lastTime)
@@ -58,16 +70,6 @@ const Tasks = ({amount}) => {
       const deltaDays = currentTime-lastTime
       if (deltaDays >= 1) {
         localStorage.setItem('lastUpdateTime', currentTime)
-
-        tools.setScore(
-          tools.getScore()
-          +
-          tools.getData(tools.getPageKey(0))
-          .tasks
-          .map(t => t.checked ? 1 : -1)
-          .reduce((a, b) => a + b, 0)
-        )
-
         updateData(deltaDays)
       }
 
