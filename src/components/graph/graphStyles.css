@@ -6,15 +6,32 @@
 
 .GraphInfoBar {
   height: var(--size-banner);
-  margin-bottom: 12px;
-  padding-left: calc(36px + var(--size-banner));
+  margin: 0 0 12px calc(36px + var(--size-banner));
+  padding-inline: 40px;
+  width: calc(100% - calc(36px + var(--size-banner)));
 
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .GraphLegend {
-
+  display: flex;
+  gap: 40px;
+  float: right;
+}
+.GraphLegendNote {
+  display: flex;
+  align-items: center;
+}
+.GraphLegendNote-color {
+  height: 50%;
+  aspect-ratio: 1/2;
+  border-radius: 100vmax;
+}
+.GraphLegendNote-text {
+  color: var(--color-dark);
+  padding-left: 20px;
+  white-space: nowrap;
 }
 
 .Graph {

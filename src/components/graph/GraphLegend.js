@@ -4,9 +4,9 @@ import {tools} from '../../tools.js';
 
 const GraphLegend = () => (
   <div className="GraphLegend">
-    <GraphLegendNote text="blue" color={tools.palette.blue}/>
-    <GraphLegendNote text="red" color={tools.palette.red}/>
-    <GraphLegendNote text="light" color={tools.palette.light}/>
+    <GraphLegendNote text="More tasks completed" color={tools.palette.blue}/>
+    <GraphLegendNote text="Fewer tasks completed" color={tools.palette.red}/>
+    <GraphLegendNote text="Completed zero tasks" color={tools.palette.light}/>
   </div>
 );
 
