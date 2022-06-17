@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Tasks from './Tasks';
-import Graph from './Graph';
+import Tasks from './page/Tasks';
+import GraphInfo from './graph/GraphInfo';
 import SceneChanger from './SceneChanger';
 
 const Scene = () => {
@@ -11,7 +11,7 @@ const Scene = () => {
       scene ?
       <Tasks amount={7}/>
       :
-      <Graph />
+      <GraphInfo />
     )()}
     <SceneChanger callBack={() => setScene(!scene)} status={scene}/>
   </div>

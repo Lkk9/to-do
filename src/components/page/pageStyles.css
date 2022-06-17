@@ -1,0 +1,134 @@
+/* all pages in taskS */
+
+.Tasks {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background: var(--color-white);
+  padding-bottom: 12px;
+
+  flex-wrap: wrap;
+  flex-direction: column;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+}
+
+/* page sections */
+
+.Page {
+  background: var(--color-light);
+  overflow: hidden;
+  width: max(min(100%, var(--size-onePage)), 50%);
+  height: 100%;
+  display: grid;
+  grid-template-rows: var(--size-banner) 1fr var(--size-banner);
+}
+.PageBanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'KatahdinRound', sans-serif;
+  user-select: none;
+}
+.PageHeader {
+  font-size: 1.5rem;
+  color: var(--color-blue);
+  background: var(--color-red);
+}
+.Page:first-child .PageHeader {
+  color: var(--color-red);
+  background: var(--color-blue);
+}
+
+.PageFooter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-white);
+  color: var(--color-dark);
+}
+
+/* icons size */
+
+.icon {
+  transition: 300ms;
+  width: var(--size-mark);
+  height: var(--size-mark);
+}
+.icon path {
+  transition: 300ms;
+}
+
+/* buttons */
+
+.AddItemsButton {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+}
+.switch-selected-item-button {
+  width: 4rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  font-size: 1.3rem;
+  color: var(--color-dark);
+  opacity: .6;
+  cursor: pointer;
+  transition: 100ms ease-out;
+}
+.switch-selected-item-button:hover {
+  opacity: 1
+}
+
+.add-icon {
+  border-radius: 50%;
+  transform: rotate(45deg);
+}
+.add-icon path {
+  fill: var(--color-dark);
+}
+
+/* expand button */
+
+.expand-button-head {
+  background: var(--color-red);
+  width: var(--size-banner);
+  height: var(--size-banner);
+}
+.expand-button {
+  width: var(--size-banner);
+  height: calc(100% - 2 * var(--size-banner));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  background: var(--color-light);
+}
+.expand-arrow {
+  width: 100%;
+}
+.expand-arrow path {
+  fill: var(--color-black);
+  opacity: .33
+}
+
+/* small indicators on first page */
+
+.info-days {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  --gap: calc(var(--size-banner)/4);
+  padding: var(--gap);
+  gap: var(--gap);
+}
+.info-days .info-day {
+  height: 100%;
+  aspect-ratio: 1/1;
+}

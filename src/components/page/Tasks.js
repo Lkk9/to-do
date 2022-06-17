@@ -1,8 +1,8 @@
-import React from 'react';
-import {useState, useEffect, useCallback, useMemo} from 'react';
+import React, {useState, useEffect, useCallback, useMemo} from 'react';
 import Page from './Page';
-import {tools} from '../tools.js';
+import {tools} from '../../tools.js';
 import SwitchButton from './SwitchButton';
+import './pageStyles.css';
 
 const Tasks = ({amount}) => {
   const [displayedPages, setDisplayedPages] = useState(2)

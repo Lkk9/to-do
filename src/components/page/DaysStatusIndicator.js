@@ -1,5 +1,5 @@
 import React from 'react';
-import {tools} from '../tools.js';
+import {tools} from '../../tools.js';
 
 const DaysStatusIndicator = ({style}) => {
   const amountOfIndicators = 5

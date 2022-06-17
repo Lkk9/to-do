@@ -1,9 +1,8 @@
-import React from 'react';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import PageBanner from './PageBanner';
 import DaysStatusIndicator from './DaysStatusIndicator';
 import AddItemsButton from './AddItemsButton';
-import List from './List';
+import List from './list/List';
 
 const Page = ({pageKey, pageIndex, children}) => {
   const [rerender, setRerender] = useState(false)

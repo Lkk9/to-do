@@ -1,0 +1,56 @@
+/* task  */
+
+.Task {
+  display: flex;
+  justify-content: flex-start;
+  border-radius: var(--size-border-radius);
+  background: var(--color-white);
+  height: 50px;
+  width: 100%;
+  z-index: 1;
+}
+.Task input[type="checkbox"]:checked ~ .checkbox-icon {
+  opacity: 1;
+}
+.Task input[type="checkbox"] {display: none;}
+
+.Task-input {
+  resize: none;
+  overflow-y: hidden;
+  font-weight: 400;
+  font-size: 1rem;
+  word-wrap: normal;
+  border: none;
+  vertical-align: middle;
+  margin: 0 10px;
+  padding: 12px 0;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  color: var(--color-blue);
+}
+.Task-input:focus {
+  outline: none;
+}
+.Task-input:read-only {
+  cursor: default;
+}
+
+/* V */
+
+.checkbox-icon {
+  opacity: .1;
+}
+.checkbox-icon path {
+  fill: var(--color-blue);
+}
+
+/* X */
+
+.remove-icon path {
+  fill: var(--color-red);
+  opacity: .1;
+}
+.Task-remove:hover .remove-icon path {
+  opacity: 1;
+}

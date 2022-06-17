@@ -1,0 +1,32 @@
+/* icons inside list */
+
+.Task-icon,
+.Note-icon {
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Task-icon {
+  height: 50px;
+}
+.Note-icon {
+  height: 100%;
+}
+
+/* list */
+
+.lists-container {
+  padding: 40px;
+  overflow-y: scroll;
+}
+.List {
+  --list-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  height: auto;
+  gap: var(--list-gap);
+}

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {tools} from '../tools.js';
-import Task from './Task';
-import Note from './Note';
+import {tools} from '../../../tools.js';
+import Task from './task/Task';
+import Note from './note/Note';
+import './listStyles.css';
 
 const List = ({isMain, pageKey}) => {
 

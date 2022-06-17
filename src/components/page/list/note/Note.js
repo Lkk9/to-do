@@ -1,4 +1,5 @@
 import React, {useEffect, useId} from 'react';
+import './noteStyles.css';
 
 const Note = ({isMain, itemIndex, itemData, rewriteListItem, removeListItem, shiftNote}) => {
   const noteId = useId()

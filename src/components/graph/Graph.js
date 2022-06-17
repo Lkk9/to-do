@@ -1,5 +1,5 @@
 import React, {useRef, useEffect} from 'react';
-import {tools} from '../tools.js';
+import {tools} from '../../tools.js';
 
 const Graph = () => {
 
@@ -160,11 +160,9 @@ const Graph = () => {
     return () => window.removeEventListener('resize', update)
   }, [])
 
-  return <div className="Graph-container">
-    <div className="Graph">
+  return <div className="Graph">
       <canvas id="graph" ref={graphRef}></canvas>
     </div>
-  </div>
 }
 
 export default Graph;

@@ -1,0 +1,28 @@
+.GraphInfo {
+  width: 100%;
+  height: 100%;
+  background: var(--color-white);
+}
+
+.GraphInfoBar {
+  height: var(--size-banner);
+  margin-bottom: 12px;
+  padding-left: calc(36px + var(--size-banner));
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.GraphLegend {
+
+}
+
+.Graph {
+  width: 100%;
+  height: calc(100% - var(--size-banner) - 12px);
+}
+
+#graph {
+  width: 100%;
+  height: 100%;
+}

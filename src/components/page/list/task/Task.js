@@ -1,4 +1,5 @@
 import React, {useEffect, useId} from 'react';
+import './taskStyles.css';
 
 const Task = ({isMain, itemData, rewriteListItem, removeListItem, completeTask, itemIndex}) => {
   const taskId = useId()
