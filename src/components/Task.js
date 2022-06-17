@@ -1,20 +1,19 @@
-import React from 'react';
-import {useEffect, useId} from 'react';
+import React, {useEffect, useId} from 'react';
 
-const Task = ({isMain, taskData, rewriteTask, removeTask, completeTask, taskIndex}) => {
+const Task = ({isMain, itemData, rewriteListItem, removeListItem, completeTask, itemIndex}) => {
   const taskId = useId()
   const checkboxId = useId()
 
   useEffect(() => {
-    document.getElementById(taskId).value = taskData.value
-    document.getElementById(checkboxId).checked = taskData.checked
+    document.getElementById(taskId).value = itemData.value
+    document.getElementById(checkboxId).checked = itemData.checked
     document.getElementById(taskId).readOnly = isMain
   })
 
   return <div className="Task">
     <label className="Task-icon" style={{display: !isMain ? 'none' : 'flex'}}>
       <input style={{display: 'none'}} type="checkbox" id={checkboxId} onChange={(e) => {
-        completeTask(taskIndex, e.target.checked)
+        completeTask(itemIndex, e.target.checked)
       }}/>
       <svg className="icon checkbox-icon"
       version="1.1"
@@ -33,41 +32,42 @@ const Task = ({isMain, taskData, rewriteTask, removeTask, completeTask, taskInde
     </label>
 
     <input
+    spellCheck="false"
     placeholder="new task"
-    wrap="off"
-    row="6"
     id={taskId}
     className="Task-input"
     onChange={(e) => {
-        rewriteTask(taskIndex, e.target.value)
+        rewriteListItem(itemIndex, e.target.value)
     }}
     />
 
-    <label className="Task-icon" style={{display: isMain ? 'none' : 'flex'}}>
-      <button style={{display: 'none'}} onClick={() => {
-        removeTask(taskIndex)
-      }}>
-      </button>
-      <svg style={{enableBackground:"new 0 0 95.939 95.939"}}
-      className="icon remove-icon"
-      version="1.1"
-      id="Capa_1"
-      xmlns="http://www.w3.org/2000/svg"
-      x="0px"
-      y="0px"
-      width="95.939px"
-      height="95.939px"
-      viewBox="0 0 95.939 95.939">
-      <g>
-        <path d="M62.819,47.97l32.533-32.534c0.781-0.781,0.781-2.047,0-2.828L83.333,0.586C82.958,0.211,82.448,0,81.919,0
-          c-0.53,0-1.039,0.211-1.414,0.586L47.97,33.121L15.435,0.586c-0.75-0.75-2.078-0.75-2.828,0L0.587,12.608
-          c-0.781,0.781-0.781,2.047,0,2.828L33.121,47.97L0.587,80.504c-0.781,0.781-0.781,2.047,0,2.828l12.02,12.021
-          c0.375,0.375,0.884,0.586,1.414,0.586c0.53,0,1.039-0.211,1.414-0.586L47.97,62.818l32.535,32.535
-          c0.375,0.375,0.884,0.586,1.414,0.586c0.529,0,1.039-0.211,1.414-0.586l12.02-12.021c0.781-0.781,0.781-2.048,0-2.828L62.819,47.97
-          z"/>
-      </g>
-      </svg>
-    </label>
+    {!isMain ?
+      <label className="Task-icon Task-remove">
+        <button style={{display: 'none'}} onClick={() => {
+          removeListItem(itemIndex)
+        }}>
+        </button>
+        <svg style={{enableBackground:"new 0 0 95.939 95.939"}}
+        className="icon remove-icon"
+        version="1.1"
+        id="Capa_1"
+        xmlns="http://www.w3.org/2000/svg"
+        x="0px"
+        y="0px"
+        width="95.939px"
+        height="95.939px"
+        viewBox="0 0 95.939 95.939">
+        <g>
+          <path d="M62.819,47.97l32.533-32.534c0.781-0.781,0.781-2.047,0-2.828L83.333,0.586C82.958,0.211,82.448,0,81.919,0
+            c-0.53,0-1.039,0.211-1.414,0.586L47.97,33.121L15.435,0.586c-0.75-0.75-2.078-0.75-2.828,0L0.587,12.608
+            c-0.781,0.781-0.781,2.047,0,2.828L33.121,47.97L0.587,80.504c-0.781,0.781-0.781,2.047,0,2.828l12.02,12.021
+            c0.375,0.375,0.884,0.586,1.414,0.586c0.53,0,1.039-0.211,1.414-0.586L47.97,62.818l32.535,32.535
+            c0.375,0.375,0.884,0.586,1.414,0.586c0.529,0,1.039-0.211,1.414-0.586l12.02-12.021c0.781-0.781,0.781-2.048,0-2.828L62.819,47.97
+            z"/>
+        </g>
+        </svg>
+      </label>
+    :<></>}
   </div>
 }
 

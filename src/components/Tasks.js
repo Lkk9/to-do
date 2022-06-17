@@ -11,10 +11,12 @@ const Tasks = ({amount}) => {
   for (let i = 0; i < amount; i++) {
     const pageKey = tools.getPageKey(i)
     if (!localStorage.getItem(pageKey)) {
-      localStorage.setItem(pageKey, JSON.stringify(tools.getBlankTask(i)))
+      const blankPage = tools.getBlankPage(i)
+      if (i === 0) blankPage.list.push(tools.getBlankTask('plan your next day'))
+      localStorage.setItem(pageKey, JSON.stringify(blankPage))
     } else if (i === 0) {
       tools.rewriteData(tools.getPageKey(0), (data) => {
-        data.tasks = data.tasks.filter(t => t.value)
+        data.list = data.list.filter(t => t.value)
         return data
       })
     }
@@ -28,7 +30,7 @@ const Tasks = ({amount}) => {
         tools.writeScore(null)
       } else {
         const pageKey = tools.getPageKey(i)
-        const tasks = tools.getData(pageKey).tasks.filter(t => t.value !== '')
+        const tasks = tools.getData(pageKey).list.filter(l => l.type === 'task').filter(t => t.value !== '')
         const score = tasks.length === 0 ? null : tasks.map(t => 2*(+t.checked)-1).reduce((a, b) => a+b, 0)
         tools.writeScore(score)
       }
@@ -37,14 +39,14 @@ const Tasks = ({amount}) => {
     if (numberOfTimes >= amount) {
       for (let i = 0; i < amount; i++) {
         const pageKey = tools.getPageKey(i)
-        localStorage.setItem(pageKey, JSON.stringify(tools.getBlankTask(i)))
+        localStorage.setItem(pageKey, JSON.stringify(tools.getBlankPage(i)))
       }
     } else {
       for (let i = numberOfTimes; i < amount; i++) {
         const pageKey = tools.getPageKey(i)
 
         if (i+numberOfTimes >= amount)
-          localStorage.setItem(pageKey, JSON.stringify(tools.getBlankTask(i)))
+          localStorage.setItem(pageKey, JSON.stringify(tools.getBlankPage(i)))
         else {
           const pageData = JSON.parse(localStorage.getItem(pageKey))
           const currentId = i-numberOfTimes
