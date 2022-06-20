@@ -31,9 +31,15 @@
   user-select: none;
 }
 .PageHeader {
-  font-size: 1.5rem;
   color: var(--color-blue);
   background: var(--color-red);
+  position: relative;
+}
+.PageHeaderText {
+  position: absolute;
+  font-size: 1.5rem;
+  font-family: 'KatahdinRound', sans-serif;
+  transition: 100ms ease-in-out;
 }
 .Page:first-child .PageHeader {
   color: var(--color-red);
@@ -119,6 +125,7 @@
 /* small indicators on first page */
 
 .info-days {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
