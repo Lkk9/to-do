@@ -44,7 +44,7 @@ const List = ({isMain, pageKey}) => {
 
   return <div className="List">
     {(()=>{
-      if (!tools.getData(pageKey).list) localStorage.removeItem(pageKey) // :\
+      if (!tools.getData(pageKey).list) localStorage.clear() // :\
       else return [...tools.getData(pageKey).list.map((itemData, i) => {
         if (itemData.type === 'task')
           return <Task
