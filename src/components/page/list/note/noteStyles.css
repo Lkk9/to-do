@@ -7,7 +7,6 @@
   background: var(--note-color-bg);
   border-radius: var(--size-border-radius);
   --size-corner: 10%;
-  /* overflow: hidden; */
 }
 .Note::before {
   content: '';

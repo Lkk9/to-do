@@ -43,28 +43,31 @@ const List = ({isMain, pageKey}) => {
   }
 
   return <div className="List">
-    {[...tools.getData(pageKey).list.map((itemData, i) => {
-      if (itemData.type === 'task')
-        return <Task
-         isMain={isMain}
-         rewriteListItem={rewriteListItem}
-         removeListItem={removeListItem}
-         completeTask={completeTask}
-         itemIndex={i}
-         itemData={itemData}
-         key={'-task-'+i}/>
-      else if (itemData.type === 'note')
-        return <Note
-          isMain={isMain}
-          shiftNote={shiftNote}
-          rewriteListItem={rewriteListItem}
-          removeListItem={removeListItem}
-          itemIndex={i}
-          itemData={itemData}
-          key={'-note-'+i}/>
-        else
-          return <></>
-    })]}
+    {(()=>{
+      if (!tools.getData(pageKey).list) localStorage.removeItem(pageKey) // :\
+      else return [...tools.getData(pageKey).list.map((itemData, i) => {
+        if (itemData.type === 'task')
+          return <Task
+           isMain={isMain}
+           rewriteListItem={rewriteListItem}
+           removeListItem={removeListItem}
+           completeTask={completeTask}
+           itemIndex={i}
+           itemData={itemData}
+           key={'-task-'+i}/>
+        else if (itemData.type === 'note')
+          return <Note
+            isMain={isMain}
+            shiftNote={shiftNote}
+            rewriteListItem={rewriteListItem}
+            removeListItem={removeListItem}
+            itemIndex={i}
+            itemData={itemData}
+            key={'-note-'+i}/>
+          else
+            return <></>
+      })]
+    })()}
   </div>
 }
 
