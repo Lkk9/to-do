@@ -16,7 +16,6 @@ const Tasks = ({amount}) => {
       localStorage.setItem(pageKey, JSON.stringify(blankPage))
     } else if (i === 0) {
       tools.rewriteData(tools.getPageKey(0), (data) => {
-        if (!data.list) localStorage.clear()
         data.list = data.list.filter(t => t.value)
         return data
       })
