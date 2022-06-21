@@ -51,6 +51,17 @@
   justify-content: space-between;
   position: relative;
 }
+/* PIN */
+/*
+content: '';
+position: absolute;
+left: 50%;
+transform: scale(50%) translate(-100%, 0);
+border-radius: 50%;
+height: 100%;
+background: var(--note-color-pin);
+aspect-ratio: 1/1;
+ */
 .Note-container::after {
   content: '';
   position: absolute;

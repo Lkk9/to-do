@@ -61,6 +61,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  z-index: 4;
 }
 .switch-scene svg {
   transform: scale(60%);

@@ -2,18 +2,28 @@ import React, {useState} from 'react';
 import Tasks from './page/Tasks';
 import GraphInfo from './graph/GraphInfo';
 import SceneChanger from './SceneChanger';
+import Menu from './menu/Menu';
 
 const Scene = () => {
-  const [scene, setScene] = useState(true)
+  const [menuExpand, setMenuExpand] = useState(false)
+  const [scene, setScene] = useState(0)
 
   return <div className="Scene">
-    {(() =>
-      scene ?
-      <Tasks amount={7}/>
-      :
-      <GraphInfo />
-    )()}
-    <SceneChanger callBack={() => setScene(!scene)} status={scene}/>
+    {(() => {
+      switch (scene) {
+        case 0:
+          return <Tasks amount={7}/>
+        case 1:
+          return <GraphInfo />
+        default:
+          return <Tasks amount={7}/>
+      }
+    })()}
+    <Menu show={menuExpand} selected={scene} setScene={(status) => {
+      setScene(status)
+      setMenuExpand(!menuExpand)
+    }}/>
+    <SceneChanger callBack={() => setMenuExpand(!menuExpand)} iconStatus={menuExpand}/>
   </div>
 }
 
