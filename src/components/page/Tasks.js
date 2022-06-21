@@ -70,16 +70,16 @@ const Tasks = ({amount}) => {
   useEffect(() => {
     const interval = setInterval(() => {
 
-      const currentTime = Date.now()//~~((Date.now() - new Date().getTimezoneOffset()*60*1000) / msInDay)
+      const currentTime = ~~((Date.now() - new Date().getTimezoneOffset()*60*1000) / msInDay)
       let lastTime = +localStorage.getItem('lastUpdateTime')
       if (!lastTime) {
         lastTime = currentTime
         localStorage.setItem('lastUpdateTime', lastTime)
       }
       const deltaDays = currentTime-lastTime
-      if (deltaDays >= 10000) {
+      if (deltaDays >= 1) {
         localStorage.setItem('lastUpdateTime', currentTime)
-        updateData(1)
+        updateData(deltaDays)
       }
 
     })
