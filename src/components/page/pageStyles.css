@@ -30,9 +30,15 @@
   font-family: 'KatahdinRound', sans-serif;
   user-select: none;
 }
-.PageHeader {
-  color: var(--color-blue);
+.PageHeader-container {
   background: var(--color-red);
+  color: var(--color-blue);
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.PageHeader {
+  height: 100%;
   position: relative;
 }
 .PageHeaderText {
@@ -40,8 +46,11 @@
   font-size: 1.5rem;
   font-family: 'KatahdinRound', sans-serif;
   transition: 100ms ease-in-out;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
-.Page:first-child .PageHeader {
+.Page:first-child .PageHeader-container {
   color: var(--color-red);
   background: var(--color-blue);
 }

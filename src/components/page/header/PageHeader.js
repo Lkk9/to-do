@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 const PageHeader = ({dayDate}) => {
   const [isHover, setIsHover] = useState(false);
 
-  return <div
+  return <div className="PageHeader-container"><div
   className="PageBanner PageHeader"
   onMouseEnter={() => setIsHover(true)}
   onMouseLeave={() => setIsHover(false)}>
@@ -13,6 +13,7 @@ const PageHeader = ({dayDate}) => {
     <div className="PageHeaderText" style={{opacity: +isHover}}>
       {dayDate.toLocaleDateString('en-US')}
     </div>
+  </div>
   </div>
 }
 

@@ -16,6 +16,7 @@ const Tasks = ({amount}) => {
       localStorage.setItem(pageKey, JSON.stringify(blankPage))
     } else if (i === 0) {
       tools.rewriteData(tools.getPageKey(0), (data) => {
+        if (!data.list) localStorage.clear()
         data.list = data.list.filter(t => t.value)
         return data
       })
@@ -39,15 +40,21 @@ const Tasks = ({amount}) => {
     if (numberOfTimes >= amount) {
       for (let i = 0; i < amount; i++) {
         const pageKey = tools.getPageKey(i)
-        localStorage.setItem(pageKey, JSON.stringify(tools.getBlankPage(i)))
+        tools.rewriteData(pageKey, (data) => {
+          data = tools.getBlankPage(i)
+          return data
+        })
       }
     } else {
       for (let i = numberOfTimes; i < amount; i++) {
         const pageKey = tools.getPageKey(i)
 
-        if (i+numberOfTimes >= amount)
-          localStorage.setItem(pageKey, JSON.stringify(tools.getBlankPage(i)))
-        else {
+        if (i+numberOfTimes >= amount) {
+          tools.rewriteData(pageKey, (data) => {
+            data = tools.getBlankPage(i)
+            return data
+          })
+        } else {
           const pageData = JSON.parse(localStorage.getItem(pageKey))
           const currentId = i-numberOfTimes
           pageData.id = currentId
@@ -63,16 +70,16 @@ const Tasks = ({amount}) => {
   useEffect(() => {
     const interval = setInterval(() => {
 
-      const currentTime = ~~((Date.now() - new Date().getTimezoneOffset()*60*1000) / msInDay)
+      const currentTime = Date.now()//~~((Date.now() - new Date().getTimezoneOffset()*60*1000) / msInDay)
       let lastTime = +localStorage.getItem('lastUpdateTime')
       if (!lastTime) {
         lastTime = currentTime
         localStorage.setItem('lastUpdateTime', lastTime)
       }
       const deltaDays = currentTime-lastTime
-      if (deltaDays >= 1) {
+      if (deltaDays >= 10000) {
         localStorage.setItem('lastUpdateTime', currentTime)
-        updateData(deltaDays)
+        updateData(1)
       }
 
     })
@@ -91,7 +98,6 @@ const Tasks = ({amount}) => {
         return yellPage(i, () => <SwitchButton switchIcon={displayedPages === amount} switchFunction={() => setDisplayedPages(displayedPages === amount ? 2 : amount)}/>)
       }
       return yellPage(i)
-      //{if (i === 1) <SwitchButton switchIcon={displayedPages === amount} switchFunction={() => setDisplayedPages(displayedPages === amount ? 2 : amount)}/>}
     })]}
   </div>
 }

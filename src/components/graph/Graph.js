@@ -24,7 +24,7 @@ const Graph = () => {
 
       canvas.width = width
       canvas.height = height
-      const data = tools.getScore()
+      const data = tools.getScore().slice(-30)
 
       const dataPoints = tools.convertScoreData(data)
       const totalPoints = dataPoints.length
