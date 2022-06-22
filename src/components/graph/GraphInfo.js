@@ -4,10 +4,10 @@ import GraphInfoBar from './GraphInfoBar';
 import './graphStyles.css';
 
 const GraphInfo = () => (
-  <div className="GraphInfo">
+  <section className="GraphInfo">
     <Graph />
     <GraphInfoBar />
-  </div>
+  </section>
 );
 
 export default GraphInfo;

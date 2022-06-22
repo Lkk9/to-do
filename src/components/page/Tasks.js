@@ -91,14 +91,14 @@ const Tasks = ({amount}) => {
   function yellPage(i, yellChildren=()=><></>) {
     return <Page pageKey={tools.getPageKey(i)} pageIndex={i} key={'pageN-'+i}>{yellChildren()}</Page>
   }
-  return <div className="Tasks">
+  return <section className="Tasks">
     {[...Array(displayedPages).fill(null).map((x, i) => {
       if (i === 1) {
         return yellPage(i, () => <SwitchButton switchIcon={displayedPages === amount} switchFunction={() => setDisplayedPages(displayedPages === amount ? 2 : amount)}/>)
       }
       return yellPage(i)
     })]}
-  </div>
+  </section>
 }
 
 export default Tasks;

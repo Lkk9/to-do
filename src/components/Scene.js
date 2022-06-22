@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Tasks from './page/Tasks';
 import GraphInfo from './graph/GraphInfo';
 import SceneChanger from './SceneChanger';
+import About from './about/About';
 import Menu from './menu/Menu';
 
 const Scene = () => {
@@ -15,6 +16,8 @@ const Scene = () => {
           return <Tasks amount={7}/>
         case 1:
           return <GraphInfo />
+        case 2:
+         return <About />
         default:
           return <Tasks amount={7}/>
       }
