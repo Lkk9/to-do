@@ -2,26 +2,35 @@
   width: 100%;
   height: 100%;
   background: var(--color-white);
+    overflow-x: hidden;
 }
 
 .GraphInfoBar {
-  height: var(--size-banner);
-  margin: 0 0 12px calc(36px + var(--size-banner));
-  padding-inline: 40px;
-  width: calc(100% - calc(36px + var(--size-banner)));
+  height: calc(var(--size-banner) + 12px);
+  padding: 0 40px 12px calc(36px + var(--size-banner) + 40px);
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 100px;
+  overflow-x: auto;
 }
 
+/* right side of graph info bar */
+
 .GraphLegend {
+  height: 100%;
   display: flex;
-  gap: 40px;
-  float: right;
+}
+
+.GraphLegend .GraphLegendNote + .GraphLegendNote{
+  margin-left: 40px;
 }
 .GraphLegendNote {
   display: flex;
   align-items: center;
+  height: 100%;
 }
 .GraphLegendNote-color {
   height: 50%;
@@ -33,6 +42,36 @@
   padding-left: 20px;
   white-space: nowrap;
 }
+
+/* left side of graph info bar */
+
+.GraphStatistics {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.GraphStatistics .StatisticsDiv + .StatisticsDiv {
+  margin-left: 40px;
+}
+
+.StatisticsDiv {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+}
+
+.StatisticsDiv p {
+  color: var(--color-dark);
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: .08rem;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+/* Graph  */
 
 .Graph {
   width: 100%;
