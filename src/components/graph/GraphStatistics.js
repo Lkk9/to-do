@@ -3,9 +3,10 @@ import StatisticsDiv from './StatisticsDiv';
 import {tools} from '../../tools.js';
 
 const GraphStatistics = () => {
-  const scoreArray = tools.getScore()
+  const scoreArray = tools.getScore().filter(x => x !== null)
   const roundTo = 100
 
+  // const averageCompletedTasks = (~~(scoreArray.reduce((a, b) => a+b, 0)/(scoreArray.length-1)*roundTo))/roundTo
   const remainingTasks = tools.getData(tools.getPageKey(0)).list.filter(l => l.type === 'task').filter(t => !t.checked).length
   const progressPerDay = (~~((scoreArray.map((n, i, a) => n - (a[i-1] || 0)).reduce((a, b) => a + b, 0)/(scoreArray.length-1))*roundTo))/roundTo
   const bestScore = Math.max(...scoreArray)
@@ -18,3 +19,4 @@ const GraphStatistics = () => {
 }
 
 export default GraphStatistics;
+// <StatisticsDiv text={'average completed tasks'} value={averageCompletedTasks} />
