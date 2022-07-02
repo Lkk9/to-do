@@ -3,7 +3,7 @@ import './menuStyles.css'
 import MenuButton from './MenuButton';
 
 const Menu = ({show, setScene, selected}) => {
-  const buttons = ['tasks', 'activity', 'about']
+  const buttons = ['Tasks', 'Activity', 'About']
   return <>
   <div
   className={`Menu-background${show ? ' Menu-background-active' : ''}`}
