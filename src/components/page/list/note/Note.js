@@ -71,7 +71,7 @@ const Note = ({isMain, itemIndex, itemData, rewriteListItem, removeListItem, shi
     <textarea
     id={noteId}
     placeholder="blank note"
-    maxLength="180"
+    maxLength="165"
     className="Note-input"
     spellCheck="false"
     onChange={(e) => {
