@@ -45,19 +45,25 @@ const Tasks = ({amount}) => {
         })
       }
     } else {
-      for (let i = numberOfTimes; i < amount; i++) {
+      for (let i = 0; i < amount; i++) {
         const pageKey = tools.getPageKey(i)
 
+        if (i >= numberOfTimes) {
+          const pageData = JSON.parse(localStorage.getItem(pageKey))
+          const currentId = i-numberOfTimes
+          pageData.id = currentId
+          localStorage.setItem(tools.getPageKey(currentId), JSON.stringify(pageData))
+        } else {
+          tools.rewriteData(pageKey, (data) => {
+            data = tools.getBlankPage(i)
+            return data
+          })
+        }
         if (i+numberOfTimes >= amount) {
           tools.rewriteData(pageKey, (data) => {
             data = tools.getBlankPage(i)
             return data
           })
-        } else {
-          const pageData = JSON.parse(localStorage.getItem(pageKey))
-          const currentId = i-numberOfTimes
-          pageData.id = currentId
-          localStorage.setItem(tools.getPageKey(currentId), JSON.stringify(pageData))
         }
 
       }
