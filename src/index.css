@@ -14,16 +14,28 @@
   font-family: 'Roboto', sans-serif;
 }
 :root {
+
   --color-light: #DDDDDD;
   --color-dark: #222831;
-  --color-red: #F05454;
-  --color-blue: #30475E;
   --color-white: #fff;
   --color-black: #000;
 
+  --color-red: #F05454;
+  --color-blue: #30475E;
+
   --note-color-bg: #BBBBBB;
-  --note-color-pin: #888;
   --note-color-text: #444;
+
+  /* --color-light: #333;
+  --color-dark: #bcbcbc;
+  --color-white: #444;
+  --color-black: #fff;
+
+  --color-red: #ffb9b0;
+  --color-blue: #8aa0bb;
+
+  --note-color-bg: #222;
+  --note-color-text: #999; */
 
   --size-mark: 60%;
   --size-onePage: 500px;
@@ -77,5 +89,6 @@ h1 {
   transform: scale(60%);
 }
 .switch-scene path {
+  fill: var(--color-black);
   opacity: .5;
 }

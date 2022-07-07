@@ -27,7 +27,7 @@
   height: 100%;
   width: 100%;
   background: transparent;
-  color: var(--color-blue);
+  color: var(--color-dark);
 }
 .Task-input:focus {
   outline: none;

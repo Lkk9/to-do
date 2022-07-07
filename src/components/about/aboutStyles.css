@@ -8,7 +8,11 @@
 
 .About > *:not(h1) {
   font-size: 1.2rem;
-  color: var(--color-blue)
+  color: var(--color-dark);
+}
+
+.About > p {
+  opacity: .9;
 }
 
 .About a {

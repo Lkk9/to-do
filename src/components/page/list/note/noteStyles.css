@@ -15,8 +15,8 @@
   bottom: 0; right: 0;
   width: var(--size-corner);
   aspect-ratio: 1/1;
-  background: var(--note-color-bg);
-  filter: contrast(50%);
+  background: #000;
+  opacity: .2;
   align-self: flex-end;
   border-radius: var(--size-border-radius) 0 0 0;
 }
@@ -56,15 +56,6 @@
 }
 /* PIN */
 /*
-content: '';
-position: absolute;
-left: 50%;
-transform: scale(50%) translate(-100%, 0);
-border-radius: 50%;
-height: 100%;
-background: var(--note-color-pin);
-aspect-ratio: 1/1;
- */
 .Note-container::after {
   content: '';
   position: absolute;
@@ -75,16 +66,18 @@ aspect-ratio: 1/1;
   background: var(--note-color-pin);
   aspect-ratio: 1/1;
 }
+ */
+
 .Note-container > * {
   height: 100%;
 }
 
 .Note-icon .icon path {
   fill: var(--note-color-bg);
-  filter: contrast(50%);
+  filter: contrast(60%);
 }
 .Note-icon:hover .icon path {
-  filter: contrast(0%);
+  filter: contrast(20%);
 }
 
 .Note-navigate {

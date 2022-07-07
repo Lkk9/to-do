@@ -31,8 +31,8 @@
   user-select: none;
 }
 .PageHeader-container {
-  background: var(--color-red);
   color: var(--color-blue);
+  background: var(--color-red);
   position: relative;
   display: flex;
   justify-content: center;
