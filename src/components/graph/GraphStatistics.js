@@ -4,17 +4,36 @@ import {tools} from '../../tools.js';
 
 const GraphStatistics = () => {
   const scoreArray = tools.getScore().filter(x => x !== null)
-  const roundTo = 100
 
-  // const remainingTasks = tools.getData(tools.getPageKey(0)).list.filter(l => l.type === 'task').filter(t => !t.checked).length
-  const averageScore = (~~(scoreArray.reduce((a, b) => a + b, 0) / scoreArray.length * roundTo))/roundTo
-  const progressPerDay = (~~(scoreArray[scoreArray.length-1] / (scoreArray.length-1) * roundTo))/roundTo//(~~((scoreArray.map((n, i, a) => n - (a[i-1] || 0)).reduce((a, b) => a + b, 0)/(scoreArray.length-1))*roundTo))/roundTo
+  const averageScore = (scoreArray.reduce((a, b) => a + b, 0) / scoreArray.length).toFixed(2)
+  const bestSequence = (() => {
+    let result = 0
+    let lastResult = result
+
+    let lastScore = 0
+    for (let i = 1; i < scoreArray.length; i++) {
+      const score = scoreArray[i]
+
+      if (score >= lastScore)
+        lastResult++
+      else
+        lastResult = 0
+
+      if (lastResult > result)
+        result = lastResult
+
+      lastScore = score
+    }
+    return result
+  })()
   const bestScore = Math.max(...scoreArray)
+  const lastScore = scoreArray[scoreArray.length - 1]
 
   return <div className="GraphStatistics">
     <StatisticsDiv text={'average'} value={averageScore} />
-    <StatisticsDiv text={'progress per day'} value={progressPerDay+' task'} />
+    <StatisticsDiv text={'best sequence'} value={bestSequence} />
     <StatisticsDiv text={'best score'} value={bestScore} />
+    <StatisticsDiv text={'last score'} value={lastScore} />
   </div>
 }
 
