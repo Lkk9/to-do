@@ -31,7 +31,7 @@ const GraphStatistics = () => {
 
   return <div className="GraphStatistics">
     <StatisticsDiv text={'average'} value={averageScore} />
-    <StatisticsDiv text={'best sequence'} value={bestSequence} />
+    <StatisticsDiv text={'best sequence'} value={bestSequence + ` Task${bestSequence!==1 ? 's':''}`} />
     <StatisticsDiv text={'best score'} value={bestScore} />
     <StatisticsDiv text={'last score'} value={lastScore} />
   </div>
