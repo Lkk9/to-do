@@ -26,7 +26,7 @@ const Graph = () => {
     canvas.height = height
 
     const scoreArray = tools.getScore()
-    if (scrollPositionIndex > scoreArray.length-1-daysShown) scrollPositionIndex--
+    if (scrollPositionIndex > scoreArray.length-daysShown) scrollPositionIndex = scoreArray.length-daysShown
     else if (scrollPositionIndex < 0) scrollPositionIndex = 0
 
     const data = scoreArray.splice(scoreArray.length-scrollPositionIndex-daysShown, daysShown)
